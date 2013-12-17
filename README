@@ -1,0 +1,11 @@
+DATA SCIENTIST FOR A DAY
+
+This is a practical codelab with the aim to guide beginners into the discipline of machine learning and classification, by means of open source tools. If you do not have both great practical and theorical skills of machine learning, here you can find a tutorial that explain you how to apply those tools, and guide you through the implementation of them. 
+
+The tutorial lab explains you the tools that you need to understand in order to develop a classification solution of this kind. By completion of the source code, you will have a working solution for classifying on a kaggle competition dataset. The kaggle dataset competition is the London Data Science competition.
+
+You are free to use this codelab for your seminars, for you courses or for your own education, but you have to give credits at the author for his work.
+The copyright of this work is owned by the author Alessandro Ferrari.
+The materials including the source codes and the latex sources are released with gpl-3.0 license. You should have received a copy of the GNU General Public License along with this tutorial.  If not, see <http://www.gnu.org/licenses/>.
+The codelab tutorial Data_Scientist_for_a_Day.pdf and the images in the img folder are released under Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit
+http://creativecommons.org/licenses/by-sa/4.0/.
