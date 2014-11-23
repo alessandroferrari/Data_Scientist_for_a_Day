@@ -37,15 +37,14 @@ def dataset_scaling(X):
 
 def misclassification_errors(classifier, X_tr, y_tr, X_cv, y_cv):
     
-    """
-	TODO: Exercise 1
-	Given an already trained classifier, the training set features and labels, and the
-	cross-validation features and labels, compute the misclassification error measure
-	on the training set and on the cross validation set, as explained in the lab track.
-	Try to do it without for loops. That does not mean that you can use while loop instead.
-    """
-
-    raise Exception("Implement your own misclassification error measure!")
+    predicted_tr = classifier.predict(X_tr)
+    predicted_cv = classifier.predict(X_cv)
+    
+    misclassified_tr = predicted_tr!=y_tr
+    misclassified_cv = predicted_cv!=y_cv
+        
+    tr_err=np.float(np.sum(misclassified_tr.astype("float")))/len(misclassified_tr)
+    cv_err=np.float(np.sum(misclassified_cv.astype("float")))/len(misclassified_cv)
         
     return tr_err, cv_err
             
@@ -105,21 +104,25 @@ class ModelSelection(object):
                 idx_gamma=0
                 for gamma in self.gamma_list:
                 
-		    """
-			TODO: Exercise 2
-			For each combination of C and gamma, compute the training error, cross-validation error, 
-			accuracy, precision, recall and f1 score obtained with the relative SVM rbf classifier,
-			obtained averaging the results obtained by the different dataset partitions re-arrangements.
-			The results will be stored relatively in the numpy arrays tr_err_by_C_and_gamma, 
-			cv_err_by_C_and_gamma, acc_by_C_and_gamma, prec_by_C_and_gamma, recall_by_C_and_gamma,
-			f1_score_by_C_and_gamma created previously. Columns contain the C index, while rows contain
-			the gamma index. While doing the exercise, you may find useful the SVC class in sklearn.svm 
-			module, the misclassification_errors that you implemented in the previous exercise and the
-			score functions that are implemented in sklearn metrics.
-		    """
-
-		    raise Exception("Wake up! You are supposed to implement this part of code!")
-
+		    classifier = SVC(kernel="rbf",C=C,gamma=gamma)
+                    classifier.fit(X_tr,y_tr)
+                          
+                    tr_err, cv_err = misclassification_errors(classifier,X_tr,y_tr,X_cv,y_cv)
+                                
+                    tr_err_by_C_and_gamma[index_C, idx_gamma]=tr_err_by_C_and_gamma[index_C, idx_gamma]+tr_err/n_iter
+                    cv_err_by_C_and_gamma[index_C, idx_gamma]=cv_err_by_C_and_gamma[index_C, idx_gamma]+cv_err/n_iter
+                
+                    y_pred=classifier.predict(X_cv)
+                
+                    acc = metrics.accuracy_score(y_cv,y_pred)
+                    prec=metrics.precision_score(y_cv,y_pred)
+                    recall=metrics.recall_score(y_cv,y_pred)
+                    f1_score=metrics.f1_score(y_cv,y_pred)
+                
+                    acc_by_C_and_gamma[index_C, idx_gamma] = acc_by_C_and_gamma[index_C, idx_gamma] + acc/n_iter
+                    prec_by_C_and_gamma[index_C, idx_gamma]=prec_by_C_and_gamma[index_C, idx_gamma]+prec/n_iter
+                    recall_by_C_and_gamma[index_C, idx_gamma]=recall_by_C_and_gamma[index_C, idx_gamma]+recall/n_iter
+                    f1_by_C_and_gamma[index_C, idx_gamma]=f1_by_C_and_gamma[index_C, idx_gamma]+f1_score/n_iter
                     
                     idx_gamma=idx_gamma + 1
                 
@@ -207,19 +210,17 @@ class LearningCurves(object):
                 reduced_X = X_tr[x_mask!=0].reshape(m,n_features)
                 reduced_y = y_tr[y_mask!=0]
 
-
-		"""
-			TODO: Exercise 3
-			Read the code of the current method "compute" and understand what is
-			happening. Once you have understood the code, try to understand the
-			meaning of the stratifiedShuffleMask method. What is that method suppose 
-			to do? What do reduced_X and reduced_y contain?
-			Then, compute for each m, the training error and the cross-validation error
-			averaged by the different re-arranged dataset ripartitions, and store them 
-			relatively in the tr_errors and cv_errors numpy vectors, order by the idx index.
-		"""
-            
-                raise Exception("One last effort! It is the last exercise.")
+		classifier=SVC(kernel="rbf", C=C, gamma=gamma)
+                
+                classifier.fit(reduced_X, reduced_y)
+                
+                tr_err, cv_err = misclassification_errors(classifier, 
+                                                          reduced_X, 
+                                                          reduced_y, 
+                                                          X_cv, y_cv)
+                
+                tr_errors[idx]=tr_errors[idx] + tr_err/n_iter
+                cv_errors[idx]=cv_errors[idx] + cv_err/n_iter
                 
 		idx+=1
                 
