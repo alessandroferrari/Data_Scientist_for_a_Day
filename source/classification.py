@@ -29,7 +29,7 @@ import numpy as np
 
 def dataset_scaling(X):
     
-    scaler=preprocessing.Scaler().fit(X)
+    scaler=preprocessing.StandardScaler().fit(X)
     X=scaler.transform(X)
     
     return X , scaler
