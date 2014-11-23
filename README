@@ -1,6 +1,6 @@
 DATA SCIENTIST FOR A DAY
 
-This is a practical codelab with the aim to guide beginners into the discipline of machine learning and classification, by means of open source tools. If you do not have both great practical and theorical skills of machine learning, here you can find a tutorial that explain you how to apply those tools, and guide you through the implementation of them. 
+This is a practical codelab with the aim to guide beginners into the discipline of machine learning and classification, by means of open source tools. If you do not have both great practical and theorical skills of machine learning, here you can find a tutorial that explain you how to apply those tools, and guide you through the implementation of them. The tools will introduce you in the use of the library sci-kit learn for classification.
 
 The tutorial lab explains you the tools that you need to understand in order to develop a classification solution of this kind. By completion of the source code, you will have a working solution for classifying on a kaggle competition dataset. The kaggle dataset competition is the London Data Science competition.
 
