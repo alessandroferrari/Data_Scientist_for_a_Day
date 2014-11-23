@@ -201,7 +201,7 @@ This gives a measure of how well the learnt hypothesis will generalize on new ex
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{\textwidth}
-        In the source folder of this codelab, you can find an incomplete implementation of the concepts explained in this lab track. You are supposed to understand the concepts and complete the code by your own. Once you have completed the code, for performing the classification of the dataset you have to run the main.py module. The main module calls some machine learning routines that are implemented in the classification.py module. In the first exercise you are supposed to implement the function misclassification\_errors in the classification.py module. Read carefully the comments that you find there and follows the indications that you received from the subsection above.
+        In the source folder of this codelab, you can find an incomplete implementation of the concepts explained in this lab track. You are supposed to understand the concepts and complete the code by your own. Once you have completed the code, for performing the classification of the dataset you have to run the main.py module. The main module calls some machine learning routines that are implemented in the classification.py module. In the first exercise you are supposed to implement the function misclassification\_errors in the classification.py module. Read carefully the comments that you find there and follows the indications that you received from the subsection above. P.s.: you can test your implementation only after that you have concluded also the next exercise!
     \end{minipage}
 };
 \node[fancytitle, right=10pt] at (box.north west) {Exercise 1};
@@ -225,6 +225,11 @@ Recall = \frac{True positives}{True positives + False negatives}
 \end{equation}
 If it is obtained a classification algorithm with high recall, it is highly probable that the
 cancer will be correctly detected to almost all the patients that actually have cancer.
+
+Finally, we define a metric that attempt to give a measure of how good is our model in maximizing both precision and recall:
+\begin{equation}
+f1\_score = 2 * \frac{precision*recall}{precision+recall}
+\end{equation}
 
 \subsection{Model Selection}
 In order to fit the correct model to the data, for avoiding overfitting and underfitting, it is important to select the best parameters. However, it has not yet been explained how to correctly select these parameters. In fact, the typical machine learning challenge does not have enough \textit{a priori} knowledge about the characteristics of the model that should be fitted. So, it has been necessary to develop a series of techniques in order to select the most suitable model, given the data. 
