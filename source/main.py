@@ -99,6 +99,10 @@ predicted = classification_obj.classify(test_scaled)
 
 print "Classification performed on the test set!"
 
+#save data in the submission format
+print "Saving classification results..."
+save_csv_submitted_labels(predicted, os.path.join(testdir,"predicted_y.csv"))
+
 #plot learning curves
 print "Plotting learning curves..."
 learning_curves = LearningCurves()
@@ -110,9 +114,5 @@ plot_learning_curves(x1=learning_curves_result["m_list"],
                      y2=learning_curves_result["cv_errors"])
     
 plt.show()
-
-#save data in the submission format
-print "Saving classification results..."
-save_csv_submitted_labels(predicted, os.path.join(testdir,"predicted_y.csv"))
 
 print "Congratulations! You have finished this codelab, you rock!"
